@@ -14,6 +14,12 @@ public class MainActivity extends AppCompatActivity {
 
         Button b1 = (Button) findViewById(R.id.test_button); // creates the main button we are going to use
         // SMS send stuff. Implement in a seperate function later
+
+    }
+
+
+    public void sendMessage(String number, String msg) {
         SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(number, null, msg, null, null);
     }
 }
