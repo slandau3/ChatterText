@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 public class MainActivity extends AppCompatActivity {
     public static final String NUMBER = ""; //need to decide who to test this on.
     public static final String MSG = "test";
+    public static int USE_BOT = 1; // 0 for no, 1 for yes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +32,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        BroadcastReceiver br = new BroadcastReceiver() {
+        CheckBox check = (CheckBox) findViewById(R.id.checkBox);
+        assert check != null;
+        if (check.isChecked()) {
+            USE_BOT = 1;
+        } else {
+            USE_BOT = 0;
         }
 
 
-
+        TextReceiver tr;
+        try {
+            tr = new TextReceiver();
+            if (tr.thoughtMessage != null) {
+                sendMessage(NUMBER, tr.thoughtMessage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
