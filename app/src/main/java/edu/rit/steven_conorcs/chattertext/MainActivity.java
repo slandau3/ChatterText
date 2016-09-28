@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-public class MainActivity extends AppCompatActivity {
-    public static final String NUMBER = ""; //need to decide who to test this on.
+public class MainActivity extends AppCompatActivity { // Program crashes on launch. Need to add some tags.
+    public static final String NUMBER = "2154993429"; //need to decide who to test this on.
     public static final String MSG = "test";
     public static int USE_BOT = 1; // 0 for no, 1 for yes
     @Override
