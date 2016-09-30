@@ -19,11 +19,17 @@ public class Bot {
 
     public Bot() throws Exception {
         ChatterBotFactory factory = new ChatterBotFactory();
-        Log.i(MainActivity.TAG, "here8");
-        ChatterBot notQuiteClyde = factory.create(ChatterBotType.CLEVERBOT);
-        Log.i(MainActivity.TAG, "Here9");
+
+        ChatterBot notQuiteClyde;
+        if (MainActivity.BotType == 0) {
+           notQuiteClyde = factory.create(ChatterBotType.CLEVERBOT);
+        } else if (MainActivity.BotType == 1) {
+            notQuiteClyde = factory.create(ChatterBotType.PANDORABOTS);
+        } else {
+            notQuiteClyde = factory.create(ChatterBotType.JABBERWACKY);
+        }
+
         clyde = notQuiteClyde.createSession();
-        Log.i(MainActivity.TAG, "here10");
     }
 
     public String think(String think) throws Exception { // think will default to null. I only included it in case anyone wanted to call it outside of TextReceiver.

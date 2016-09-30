@@ -30,4 +30,41 @@
         android:layout_centerHorizontal="true"
         android:hint="Phone #" />
 
+    <RadioGroup
+        android:id="@+id/rg1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="125dp">
+
+        <RadioButton
+            android:text="Cleverbot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/clevBot"
+            android:layout_below="@+id/phoneNumber"
+            android:layout_alignParentStart="true"
+            android:elevation="1dp" />
+
+        <RadioButton
+            android:text="Jabberwacky"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/clevBot"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/jabBot" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/jabBot"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/panBot"
+            android:text="Pandorabot" />
+    </RadioGroup>
+
+
 </RelativeLayout>
