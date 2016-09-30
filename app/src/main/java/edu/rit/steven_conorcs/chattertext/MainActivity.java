@@ -1,3 +1,11 @@
+/**
+ * @file MainActivity.java
+ * @author Steven Landau
+ * @brief Have you ever wanted to not talk to someone but are too nice to just ignore them?
+ * This android 6.0 (Marshmellow) program detects when your phone receives a textmessage
+ * from the specified person. The program will then pass the contents of that message over to
+ * the selected chat bot api. The chat bots response will be sent back to the original sender.
+ */
 package edu.rit.steven_conorcs.chattertext;
 
 import android.Manifest;
