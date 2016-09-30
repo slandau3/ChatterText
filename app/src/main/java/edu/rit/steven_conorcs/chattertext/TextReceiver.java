@@ -25,7 +25,7 @@ public class TextReceiver extends BroadcastReceiver{
     public void onReceive(Context context, Intent intent) {
 
         if (intent.getAction().equals(SMS_RECEIVED) || intent.getAction().equals(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)) {
-            Bundle intentExtras = intent.getExtras();
+            Bundle intentExtras = intent.getExtras(); //TODO: Check to see if the bot is activated and the numbers match.
             if (intentExtras != null) {
                 Object[] sms = (Object[]) intentExtras.get("pdus");
                 assert sms != null;
@@ -42,17 +42,9 @@ public class TextReceiver extends BroadcastReceiver{
 
 
                     try {
-                        Log.i(MainActivity.TAG, "about to call the bot OK");
-                        Bot Tom = new Bot();
-                        Log.i(MainActivity.TAG, "here");
-                        Tom.msg_received = contents;
-                        Log.i(MainActivity.TAG, "here1");
-                        Tom.nmbr_sender = sender;
-                        Log.i(MainActivity.TAG, "Here2");
-                        thoughtMessage = Tom.think(contents);
-                        Log.i(MainActivity.TAG, "HEre3");
-                        Log.i(MainActivity.TAG, thoughtMessage);
-                        Log.i(MainActivity.TAG, "Thought message received OK");
+                        clyde.msg_received = contents;
+                        clyde.nmbr_sender = sender;
+                        thoughtMessage = clyde.think(contents);
                         sendMessage(MainActivity.NUMBER, thoughtMessage);
                         // have bot send message. then add something to the interface to toggle the bot and have it set the number.. etc...
 

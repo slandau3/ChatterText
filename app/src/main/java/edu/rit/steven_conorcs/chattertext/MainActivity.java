@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +20,12 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity { // Program crashes on launch. Need to add some tags.
-    public static final String NUMBER = "2243256933"; //need to decide who to test this on.
-    public static final String MSG = "test";
+    public static String NUMBER = "2243256933"; //need to decide who to test this on.
     public static int USE_BOT = 0; // 0 for no, 1 for yes
     public static final String TAG = "WALK-THROUGH";
     public static Bot clyde = null;
     private CheckBox check;
+    private TextView phone;
 
 
 
@@ -41,22 +42,17 @@ public class MainActivity extends AppCompatActivity { // Program crashes on laun
         setContentView(R.layout.activity_main);
 
         getPermissions();
+        phone = (TextView) findViewById(R.id.phoneNumber);
 
-        Button b1 = (Button) findViewById(R.id.test_button); // creates the main button we are going to use
-        assert b1 != null;
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMessage(NUMBER, MSG);
-            }
-        });
         check = (CheckBox) findViewById(R.id.checkBox);
         assert check != null;
         check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                assert phone.getText().toString().length() == 0; //TODO: Work on the interface. Make sure number is working
                 if (isChecked) {
                     USE_BOT = 1;
+                    NUMBER = phone.getText().toString();
                 } else {
                     USE_BOT = 0;
                 }
