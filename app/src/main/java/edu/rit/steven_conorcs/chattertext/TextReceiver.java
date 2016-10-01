@@ -63,7 +63,7 @@ public class TextReceiver extends BroadcastReceiver{
         clyde = MainActivity.clyde;
     }
     public void sendMessage(String number, String msg) throws InterruptedException {
-        wait(20);
+
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(number, null, msg, null, null);
     }
