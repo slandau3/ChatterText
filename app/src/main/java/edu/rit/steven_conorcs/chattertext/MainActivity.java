@@ -9,31 +9,23 @@
 package edu.rit.steven_conorcs.chattertext;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import static android.R.attr.id;
-
 public class MainActivity extends AppCompatActivity { // Program crashes on launch. Need to add some tags.
-    public static String NUMBER = "2243256933"; //need to decide who to test this on.
+    public static String NUMBER = ""; //need to decide who to test this on.
     public static int USE_BOT = 0; // 0 for no, 1 for yes
     public static final String TAG = "WALK-THROUGH";
     public static Bot clyde = null;
@@ -59,7 +51,6 @@ public class MainActivity extends AppCompatActivity { // Program crashes on laun
         getPermissions();
 
         // Create Radio Buttons/group
-
         bots = (RadioGroup) findViewById(R.id.rg1);
         assert bots != null;
         bots.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +89,9 @@ public class MainActivity extends AppCompatActivity { // Program crashes on laun
         check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (phone.getText().toString().length() == 0) {
+                if (phone.getText().toString().length() == 0) {  // I know it's not the best thing to check but ill get to it later.
                     check.setChecked(false);
+                    //startActivity(new Intent(MainActivity.this, InvalidNumberEntry.class));
                     // Alert the user that a phone # is required
                 }
                 else if (isChecked) {

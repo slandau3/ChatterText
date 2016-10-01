@@ -29,6 +29,9 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".InvalidNumberEntry"
+            android:theme="@style/AppTheme.invalidNumTheme"/>
+
     </application>
 
 </manifest>

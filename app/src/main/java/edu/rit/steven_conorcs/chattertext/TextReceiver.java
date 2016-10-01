@@ -39,7 +39,9 @@ public class TextReceiver extends BroadcastReceiver{
                     assert smsMessage != null;
                     String contents = smsMessage.getMessageBody();
                     String sender = smsMessage.getOriginatingAddress();
-
+                    if (!MainActivity.NUMBER.equals(sender) || MainActivity.USE_BOT == 0) {
+                        break;
+                    }
 
                     try {
                         clyde.msg_received = contents;
@@ -57,7 +59,11 @@ public class TextReceiver extends BroadcastReceiver{
         }
     }
 
-    public void sendMessage(String number, String msg) {
+    public void update() {
+        clyde = MainActivity.clyde;
+    }
+    public void sendMessage(String number, String msg) throws InterruptedException {
+        wait(20);
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(number, null, msg, null, null);
     }
