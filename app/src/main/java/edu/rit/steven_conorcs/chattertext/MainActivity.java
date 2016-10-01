@@ -24,8 +24,8 @@ import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity { // Program crashes on launch. Need to add some tags.
-    public static String NUMBER = ""; //need to decide who to test this on.
+public class MainActivity extends AppCompatActivity {
+    public static String NUMBER = "";
     public static int USE_BOT = 0; // 0 for no, 1 for yes
     public static final String TAG = "WALK-THROUGH";
     public static Bot clyde = null;

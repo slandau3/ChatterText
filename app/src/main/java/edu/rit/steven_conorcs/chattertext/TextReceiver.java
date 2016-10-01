@@ -25,7 +25,7 @@ public class TextReceiver extends BroadcastReceiver{
     public void onReceive(Context context, Intent intent) {
 
         if (intent.getAction().equals(SMS_RECEIVED) || intent.getAction().equals(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)) {
-            Bundle intentExtras = intent.getExtras(); //TODO: Check to see if the bot is activated and the numbers match.
+            Bundle intentExtras = intent.getExtras();
             if (intentExtras != null) {
                 Object[] sms = (Object[]) intentExtras.get("pdus");
                 assert sms != null;
