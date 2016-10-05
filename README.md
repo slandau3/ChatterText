@@ -1,6 +1,6 @@
-# ChatterText
+# TextBot
 
 
-ReadME File To ChatterText Android App.
+ReadME File To TextBot Android App.
 
-ChatterText is an application that sends and recieves text messages using the ChatterBot API. 
+TextBot is an application that sends and recieves text messages using various ChatBot APIs. 
