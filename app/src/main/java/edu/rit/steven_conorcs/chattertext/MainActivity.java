@@ -15,14 +15,18 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
     public static String NUMBER = "";
@@ -30,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "WALK-THROUGH";
     public static Bot clyde = null;
     public static int BotType = 0; // defaults to Cleverbot
+    public static int delay = 0;
     private CheckBox check;
     private TextView phone;
     private RadioGroup bots;
+    private EditText startTime, endTime;
+    private AlertDialog.Builder dlgAlert;
 
 
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // Not safe but works. I will do networking the proper way at some point.
@@ -49,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getPermissions();
+        dlgAlert = new AlertDialog.Builder(this);
+
 
         // Create Radio Buttons/group
         bots = (RadioGroup) findViewById(R.id.rg1);
@@ -83,12 +90,19 @@ public class MainActivity extends AppCompatActivity {
         // Create Phone bar
         phone = (TextView) findViewById(R.id.phoneNumber);
 
+        // Create Time Delay
+        startTime = (EditText) findViewById(R.id.startTime);
+
+
+        endTime = (EditText) findViewById(R.id.endTime);
+
         // Create and set check box
         check = (CheckBox) findViewById(R.id.checkBox);
         assert check != null;
         check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if (phone.getText().toString().length() == 0) {  // I know it's not the best thing to check but ill get to it later.
                     check.setChecked(false);
                     //startActivity(new Intent(MainActivity.this, InvalidNumberEntry.class));
@@ -100,8 +114,47 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     USE_BOT = 0;
                 }
+
+                // Configure the time delay
+                int minWait = 0;
+                try {
+                    String givenWait = startTime.getText().toString();
+                    if (!givenWait.equals("")) {
+                        minWait = Integer.parseInt(givenWait);
+                    }
+                } catch (NullPointerException npe) {
+                    // Leave minWait as 0
+                }
+
+                int maxWait = 0;
+                try {
+                    String givenWait = endTime.getText().toString();
+                    if (!givenWait.equals("")) {
+                        maxWait = Integer.parseInt(givenWait);
+                    }
+                } catch (NullPointerException npe) {
+                    // Leave maxWait as 0
+                }
+
+                if (minWait > maxWait) {
+                    dlgAlert.setMessage("\"From\" time must be greater than or equal to \"To\"");
+                    dlgAlert.setTitle("Input Error");
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                    USE_BOT = 0;
+                    check.setChecked(false);
+                } else {
+                    int secondsDelay = ThreadLocalRandom.current().nextInt(minWait, maxWait + 1);
+                    delay = secondsDelay * 1000;  // Milliseconds delay
+                }
+
             }
         });
+
+        // Time Delay
+
+
+
     }
 
     /**
@@ -129,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Old. This method is now used in TextReceiver. It may one day, be used again in MainActivity.
+     * Deprecated. This method is now used in TextReceiver. It may one day be used again in MainActivity.
      * @param number The phone number to send the SMS message
      * @param msg The content of the SMS message.
      */

@@ -32,11 +32,8 @@ public class Bot {
         clyde = notQuiteClyde.createSession();
     }
 
-    public String think(String think) throws Exception { // think will default to null. I only included it in case anyone wanted to call it outside of TextReceiver.
-        if (think.length() == 0) {
-            return clyde.think(msg_received);
-        } else {
-            return clyde.think(think);
-        }
+    public String think(String think) throws Exception {
+        // TODO: The link is depricated so I need to fix this bot nonsense.
+        return clyde.think(think);
     }
 }

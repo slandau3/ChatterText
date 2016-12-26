@@ -46,7 +46,10 @@ public class TextReceiver extends BroadcastReceiver{
                     try {
                         clyde.msg_received = contents;
                         clyde.nmbr_sender = sender;
+                        Log.i("WALK-THROUGH", "here");
+
                         thoughtMessage = clyde.think(contents);
+                        Log.i("WALK-THROUGH", thoughtMessage);
                         sendMessage(MainActivity.NUMBER, thoughtMessage);
                         // have bot send message. then add something to the interface to toggle the bot and have it set the number.. etc...
 
@@ -63,6 +66,7 @@ public class TextReceiver extends BroadcastReceiver{
         clyde = MainActivity.clyde;
     }
     public void sendMessage(String number, String msg) throws InterruptedException {
+        Thread.sleep(MainActivity.delay);
 
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(number, null, msg, null, null);
