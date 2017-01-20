@@ -29,12 +29,17 @@ import android.widget.TextView;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int CLEVERBOT = 0;
+    public static final int PANDORABOT = 1;
+    public static final int JABBERWOCKY = 2;
+
     public static String NUMBER = "";
     public static int USE_BOT = 0; // 0 for no, 1 for yes
     public static final String TAG = "WALK-THROUGH";
     public static Bot clyde = null;
     public static int BotType = 0; // defaults to Cleverbot
     public static int delay = 0;
+
     private CheckBox check;
     private TextView phone;
     private RadioGroup bots;
@@ -64,21 +69,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (bots.getCheckedRadioButtonId() == R.id.clevBot) {
-                    BotType = 0;
+                    BotType = CLEVERBOT;
                     try {
                         clyde = new Bot();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else if (bots.getCheckedRadioButtonId() == R.id.panBot) {
-                    BotType = 1;
+                    BotType = PANDORABOT;
                     try {
                         clyde = new Bot();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else if (bots.getCheckedRadioButtonId() == R.id.jabBot) {
-                    BotType = 2;
+                    BotType = JABBERWOCKY;
                     try {
                         clyde = new Bot();
                     } catch (Exception e) {
@@ -182,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Deprecated. This method is now used in TextReceiver. It may one day be used again in MainActivity.
+     * @deprecated This method is now used in TextReceiver. It may one day be used again in MainActivity.
      * @param number The phone number to send the SMS message
      * @param msg The content of the SMS message.
      */

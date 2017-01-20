@@ -10,6 +10,7 @@ import com.google.code.chatterbotapi.ChatterBotType;
 /**
  * Created by Steven Landau on 9/27/2016.
  */
+
 public class Bot {
     public String msg_received;
     public String nmbr_sender;
@@ -21,10 +22,12 @@ public class Bot {
         ChatterBotFactory factory = new ChatterBotFactory();
 
         ChatterBot notQuiteClyde;
-        if (MainActivity.BotType == 0) {
+        if (MainActivity.BotType == MainActivity.CLEVERBOT) {
            notQuiteClyde = factory.create(ChatterBotType.CLEVERBOT);
-        } else if (MainActivity.BotType == 1) {
+
+        } else if (MainActivity.BotType == MainActivity.PANDORABOT) {
             notQuiteClyde = factory.create(ChatterBotType.PANDORABOTS);
+
         } else {
             notQuiteClyde = factory.create(ChatterBotType.JABBERWACKY);
         }
